@@ -61,14 +61,10 @@ public class Chatbot
 	
 	public boolean lengthChecker(String input)
 	{
-		boolean properLength = true;
-		if (input == null)
+		boolean properLength = false;
+		if (input != null && input.length() >= 2)
 		{
-			properLength = false;
-		}
-		else if (input.length() < 2)
-		{
-			properLength = false;
+			properLength = true;
 		}
 		return properLength;
 	}
