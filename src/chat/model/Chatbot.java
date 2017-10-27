@@ -23,7 +23,7 @@ public class Chatbot
 		this.movieList = new ArrayList<Movie>();
 		this.shoppingList = new ArrayList<String>();
 		this.cuteAnimalMemes = new ArrayList<String>();
-		this.currentTime = null;
+		this.currentTime = LocalTime.now();
 		this.questions = new String[6];
 		this.username = username;
 		this.content = "";

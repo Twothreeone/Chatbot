@@ -26,7 +26,7 @@ public class Movie
 		this.ratingMPAA = "G";
 		this.review = "This movie is a movie.";
 		this.length = 11;
-		this.releaseDate = null;
+		this.releaseDate = LocalDate.now();
 		this.starScore = 0.0;
 	}
 
