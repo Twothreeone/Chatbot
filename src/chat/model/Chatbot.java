@@ -24,11 +24,11 @@ public class Chatbot
 		this.shoppingList = new ArrayList<String>();
 		this.cuteAnimalMemes = new ArrayList<String>();
 		this.currentTime = LocalTime.now();
-		this.questions = new String[6];
+		this.questions = new String[10];
 		this.username = username;
 		this.content = "";
 		this.intro = "";
-		this.topics = new String[0];
+		this.topics = new String[5];
 		this.verbs = new String[4];
 		this.followUps = new String[0];
 		buildMovieList();
@@ -36,7 +36,16 @@ public class Chatbot
 		buildVerbs();
 		buildQuestions();
 //		buildFollowups();
-//		buildTopics();
+		buildTopics();
+	}
+	
+	private void buildTopics()
+	{
+		topics[0] = "math";
+		topics[1] = "video games";
+		topics[2] = "food";
+		topics[3] = "anime";
+		topics[4] = "work";
 	}
 	
 	private void buildVerbs()
@@ -83,8 +92,12 @@ public class Chatbot
 		questions[1] = "What are your favorite hobbies?";
 		questions[2] = "How do you live?";
 		questions[3] = "What is your favorite color?";
-		questions[4] = "";
-		questions[5] = "";
+		questions[4] = "Why?";
+		questions[5] = "What is your least favorite emotion?";
+		questions[6] = "What is your job?";
+		questions[7] = "Why are you so useless?";
+		questions[8] = "Do you sleep?";
+		questions[9] = "What is your favorite movie?";
 	}
 	
 	public String processConversation(String input)
@@ -153,12 +166,33 @@ public class Chatbot
 
 	public boolean quitChecker(String exitString)
 	{
+		if (exitString == null)
+		{
+			return false;
+		}
+		if (exitString.equalsIgnoreCase("quit"))
+		{
+			return true;
+		}
 		return false;
 	}
 
 	public boolean keyboardMashChecker(String sample)
 	{
+		String mash = "qwertyuiop[]asdfghjkl;'zxcvbnm,./.,mnbvcxz';lkjhgfdsa][poiuytrewq";
+		for (int i = 0; i < mash.length() - 2; i++)
+		{
+			if (mash.substring(i, i + 3).equalsIgnoreCase(sample))
+			{
+				return true;
+			}
+		}
 		return false;
+	}
+	
+	public String toString()
+	{
+		return "";
 	}
 	
 	public List<Movie> getMovieList()

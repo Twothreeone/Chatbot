@@ -5,8 +5,8 @@ import chat.model.Chatbot;
 
 public class ChatbotController
 {
-	Chatbot chatbot;
-	PopupDisplay display;
+	private Chatbot chatbot;
+	private PopupDisplay display;
 	
 	public ChatbotController()
 	{
@@ -16,7 +16,16 @@ public class ChatbotController
 	
 	public void start()
 	{
-		display.displayMessage("words");
-		display.getResponse("question");
+		String response = display.getResponse("What do you want to talk about?");
+		while (chatbot.lengthChecker(response) && !chatbot.quitChecker(response))
+		{
+			response = popupChat(response);
+			response = display.getResponse(response);
+		}
+	}
+	
+	private String popupChat(String chat)
+	{
+		return chatbot.processConversation(chat);
 	}
 }
