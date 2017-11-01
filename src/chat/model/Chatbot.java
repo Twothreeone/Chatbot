@@ -33,6 +33,10 @@ public class Chatbot
 		this.followUps = new String[0];
 		buildMovieList();
 		buildShoppingList();
+		buildVerbs();
+		buildQuestions();
+//		buildFollowups();
+//		buildTopics();
 	}
 	
 	private void buildVerbs()
@@ -75,12 +79,31 @@ public class Chatbot
 	
 	private void buildQuestions()
 	{
-		
+		questions[0] = "What is your name?";
+		questions[1] = "What are your favorite hobbies?";
+		questions[2] = "How do you live?";
+		questions[3] = "What is your favorite color?";
+		questions[4] = "";
+		questions[5] = "";
 	}
 	
 	public String processConversation(String input)
 	{
-		return "I hate you.";
+		String chatbotResponse = "You said:" + "\n" + input + "\n";
+		chatbotResponse += buildChatbotResponse();
+		return chatbotResponse;
+	}
+	
+	private String buildChatbotResponse()
+	{
+		String response = "I ";
+		int random = (int) (Math.random() * verbs.length);
+		response += verbs[random];
+		random = (int) (Math.random() * topics.length);
+		response += " " + topics[random] + ".\n";
+		random = (int) (Math.random() * questions.length);
+		response += questions[random];
+		return response;
 	}
 	
 	public boolean lengthChecker(String input)
