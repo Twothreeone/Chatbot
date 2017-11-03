@@ -151,6 +151,13 @@ public class Chatbot
 	
 	public boolean shoppingListChecker(String shoppingItem)
 	{
+		for (String item : shoppingList)
+		{
+			if (shoppingItem.toLowerCase().contains(item))
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -179,10 +186,10 @@ public class Chatbot
 
 	public boolean keyboardMashChecker(String sample)
 	{
-		String mash = "qwertyuiop[]asdfghjkl;'zxcvbnm,./.,mnbvcxz';lkjhgfdsa][poiuytrewq";
-		for (int i = 0; i < mash.length() - 2; i++)
+		String[] mash = {"sdf", "SDF", "dfg", "cvb", ",./", "kjh", "DFG", "CVB", "KJH"};
+		for (String letters : mash)
 		{
-			if (mash.substring(i, i + 3).equalsIgnoreCase(sample))
+			if (sample.contains(letters))
 			{
 				return true;
 			}
