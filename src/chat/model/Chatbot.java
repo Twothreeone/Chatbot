@@ -116,6 +116,12 @@ public class Chatbot
 		response += " " + topics[random] + ".\n";
 		random = (int) (Math.random() * questions.length);
 		response += questions[random];
+		random = (int) (Math.random() * 5);
+		if (random % 5 == 0)
+		{
+			random = (int) (Math.random() * movieList.size());
+			response += "\n" + movieList.get(random).getTitle() + " is a great movie!";
+		}
 		return response;
 	}
 	
