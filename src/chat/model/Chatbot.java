@@ -26,7 +26,7 @@ public class Chatbot
 		this.currentTime = LocalTime.now();
 		this.questions = new String[10];
 		this.username = username;
-		this.content = "";
+		this.content = "content";
 		this.intro = "";
 		this.topics = new String[5];
 		this.verbs = new String[4];
@@ -136,11 +136,27 @@ public class Chatbot
 	
 	public boolean userNameChecker(String input)
 	{
-		return false;
+		if (input == null)
+		{
+			return false;
+		}
+		if (input.length() < 2 || input.charAt(0) != '@' || input.substring(1,input.length()).contains("@"))
+		{
+			return false;
+		}
+		return true;
 	}
 	
 	public boolean contentChecker(String contentCheck)
 	{
+		if (content.length() < 6)
+		{
+			return false;
+		}
+		if (contentCheck.toLowerCase().contains(content.toLowerCase()))
+		{
+			return true;
+		}
 		return false;
 	}
 	
