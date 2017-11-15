@@ -21,7 +21,12 @@ public class ChatFrame extends JFrame
 		this.setContentPane(appPane);
 		this.setTitle("Chatting with the Chatbot");
 		this.setResizable(false);
-		this.setSize(600, 600);
+		this.setSize(500, 500);
 		this.setVisible(true);
+	}
+	
+	public ChatbotController getBaseController()
+	{
+		return appController;
 	}
 }
