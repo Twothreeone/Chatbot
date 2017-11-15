@@ -31,4 +31,24 @@ public class ChatbotController
 	{
 		return chatbot.processConversation(chat);
 	}
+	
+	public String interactWithChatbot(String input)
+	{
+		return "";
+	}
+	
+	public Chatbot getChatbot()
+	{
+		return chatbot;
+	}
+	
+	public PopupDisplay getDisplay()
+	{
+		return display;
+	}
+	
+	public ChatFrame getChatFrame()
+	{
+		return appFrame;
+	}
 }
