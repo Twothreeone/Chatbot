@@ -23,6 +23,7 @@ public class Chatbot
 	 * Constructor for Chatbot, initializes data members.
 	 * 
 	 * @param username
+	 *            The user's username
 	 */
 	public Chatbot(String username)
 	{
@@ -45,7 +46,7 @@ public class Chatbot
 	 */
 	private void buildTopics()
 	{
-		topics = new String[] {"math", "video games", "food", "anime", "work"};
+		topics = new String[] { "math", "video games", "food", "anime", "work" };
 	}
 
 	/**
@@ -53,7 +54,7 @@ public class Chatbot
 	 */
 	private void buildVerbs()
 	{
-		verbs = new String[] {"like", "dislike", "am ambivalent about", "am thinking about"};
+		verbs = new String[] { "like", "dislike", "am ambivalent about", "am thinking about" };
 	}
 
 	/**
@@ -130,7 +131,9 @@ public class Chatbot
 
 	/**
 	 * Checks the length of the users input to make sure it is valid.
-	 * @param input The user's input.
+	 * 
+	 * @param input
+	 *            The user's input.
 	 * @return The validity of the user's input's length.
 	 */
 	public boolean lengthChecker(String input)
@@ -145,7 +148,9 @@ public class Chatbot
 
 	/**
 	 * Checks the validity of the HTML tag
-	 * @param input HTML tag
+	 * 
+	 * @param input
+	 *            HTML tag
 	 * @return The validity of the HTML tag
 	 */
 	public boolean htmlTagChecker(String input)
@@ -155,7 +160,9 @@ public class Chatbot
 
 	/**
 	 * Checks the validity of the user's username.
-	 * @param input The user's username.
+	 * 
+	 * @param input
+	 *            The user's username.
 	 * @return The validity of the user's username.
 	 */
 	public boolean userNameChecker(String input)
@@ -173,7 +180,9 @@ public class Chatbot
 
 	/**
 	 * Checks if the content data member is anywhere in the supplied text.
-	 * @param contentCheck The user's input.
+	 * 
+	 * @param contentCheck
+	 *            The user's input.
 	 * @return If the content data member is in the user's input.
 	 */
 	public boolean contentChecker(String contentCheck)
@@ -191,7 +200,9 @@ public class Chatbot
 
 	/**
 	 * Checks if a cute animal meme is anywhere in the user's input.
-	 * @param input The user's input.
+	 * 
+	 * @param input
+	 *            The user's input.
 	 * @return Whether or not the user's input contains a cute animal meme.
 	 */
 	public boolean cuteAnimalMemeChecker(String input)
@@ -201,7 +212,9 @@ public class Chatbot
 
 	/**
 	 * Checks if an item on the shoppingList is anywhere in the user's input.
-	 * @param shoppingItem The user's input.
+	 * 
+	 * @param shoppingItem
+	 *            The user's input.
 	 * @return Whether or not the user's input contains an item on the shoppingList.
 	 */
 	public boolean shoppingListChecker(String shoppingItem)
@@ -218,7 +231,9 @@ public class Chatbot
 
 	/**
 	 * Checks if a movie on the movieList appears anywhere in the user's input.
-	 * @param title The user's input.
+	 * 
+	 * @param title
+	 *            The user's input.
 	 * @return Whether or not the user's input contains a movie on the movieList.
 	 */
 	public boolean movieTitleChecker(String title)
@@ -228,7 +243,9 @@ public class Chatbot
 
 	/**
 	 * Checks if a movie genre on the movieList appears anywhere in the user's input.
-	 * @param genre The user's input.
+	 * 
+	 * @param genre
+	 *            The user's input.
 	 * @return Whether or not the user's input contains a movie genre on the movieList.
 	 */
 	public boolean movieGenreChecker(String genre)
@@ -238,7 +255,9 @@ public class Chatbot
 
 	/**
 	 * Checks if the user wants to stop chatting.
-	 * @param exitString The user's input.
+	 * 
+	 * @param exitString
+	 *            The user's input.
 	 * @return Whether or not the user wants to quit.
 	 */
 	public boolean quitChecker(String exitString)
@@ -256,7 +275,9 @@ public class Chatbot
 
 	/**
 	 * Checks if the user is keyboard mashing.
-	 * @param sample The user's input.
+	 * 
+	 * @param sample
+	 *            The user's input.
 	 * @return Whether or not the user is keyboard mashing.
 	 */
 	public boolean keyboardMashChecker(String sample)
@@ -369,7 +390,8 @@ public class Chatbot
 	}
 
 	/**
-	 * @param username new username
+	 * @param username
+	 *            new username
 	 */
 	public void setUsername(String username)
 	{
@@ -377,7 +399,8 @@ public class Chatbot
 	}
 
 	/**
-	 * @param content new content
+	 * @param content
+	 *            new content
 	 */
 	public void setContent(String content)
 	{
