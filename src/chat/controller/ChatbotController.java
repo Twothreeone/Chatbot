@@ -25,22 +25,7 @@ public class ChatbotController
 	 */
 	public void start()
 	{
-		String response = display.getResponse("What do you want to talk about?");
-//		while (chatbot.lengthChecker(response) && !chatbot.quitChecker(response))
-//		{
-//			response = popupChat(response);
-//			response = display.getResponse(response);
-//		}
-	}
-	
-	/**
-	 * Does basic chatbot communication through popups.
-	 * @param chat The user's input.
-	 * @return The chatbot's response.
-	 */
-	private String popupChat(String chat)
-	{
-		return chatbot.processConversation(chat);
+		display.displayMessage("Welcome to Chatbot");
 	}
 	
 	/**
@@ -50,9 +35,18 @@ public class ChatbotController
 	 */
 	public String interactWithChatbot(String input)
 	{
-		return "";
+		if(chatbot.quitChecker(input))
+		{
+			close();
+		}
+		return chatbot.processConversation(input);
 	}
 	
+	private void close()
+	{
+		display.displayMessage("Goodbye");
+		System.exit(0);
+	}
 	
 	/**
 	 * @return chatbot
