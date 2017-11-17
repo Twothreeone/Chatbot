@@ -30,6 +30,31 @@ public class Movie
 		this.starScore = 0.0;
 	}
 	
+	public Movie(String title, String genre)
+	{
+		if (title.length() > 3)
+		{
+			this.title = title;
+		}
+		else
+		{
+			this.title = "movie";
+		}
+		if (genre.length() > 4)
+		{
+			this.genre = genre;
+		}
+		else
+		{
+			this.genre = "generic";
+		}
+		this.ratingMPAA = "G";
+		this.review = "This movie is a movie.";
+		this.length = 11;
+		this.releaseDate = LocalDate.now();
+		this.starScore = 0.0;
+	}
+	
 	public Movie(String title, String genre, String ratingMPAA, String review, int length, LocalDate releaseDate, double starScore)
 	{
 		this.title = title;

@@ -27,7 +27,6 @@ public class Chatbot
 	 */
 	public Chatbot(String username)
 	{
-		this.cuteAnimalMemes = new ArrayList<String>();
 		this.currentTime = LocalTime.now();
 		this.username = username;
 		this.content = "content";
@@ -39,6 +38,7 @@ public class Chatbot
 		buildQuestions();
 		// buildFollowups();
 		buildTopics();
+		buildCuteAnimals();
 	}
 
 	/**
@@ -63,7 +63,8 @@ public class Chatbot
 	private void buildMovieList()
 	{
 		movieList = new ArrayList<Movie>(Arrays.asList(new Movie("Back to the Future"), new Movie("The Princess Bride"), new Movie("Spirited Away"), new Movie("Ferris Bueller's Day Off"),
-				new Movie("Space Balls"), new Movie("Monty Python and the Quest for the Holy Grail")));
+				new Movie("Space Balls"), new Movie("Monty Python and the Quest for the Holy Grail"), new Movie("Spiderman"), new Movie("Hidden Figures"),
+				new Movie("Journey to the Edge of the Universe", "Documentary"), new Movie("Jigsaw", "Thriller")));
 	}
 
 	/**
@@ -79,7 +80,7 @@ public class Chatbot
 	 */
 	private void buildCuteAnimals()
 	{
-
+		cuteAnimalMemes = new ArrayList<String>(Arrays.asList("otter", "pupper", "kittie", "floofer"));
 	}
 
 	/**
@@ -207,6 +208,13 @@ public class Chatbot
 	 */
 	public boolean cuteAnimalMemeChecker(String input)
 	{
+		for (String meme : cuteAnimalMemes)
+		{
+			if (input.toLowerCase().contains(meme))
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -238,6 +246,13 @@ public class Chatbot
 	 */
 	public boolean movieTitleChecker(String title)
 	{
+		for (Movie movieTitle : movieList)
+		{
+			if (title.toLowerCase().contains(movieTitle.getTitle().toLowerCase()))
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -250,6 +265,13 @@ public class Chatbot
 	 */
 	public boolean movieGenreChecker(String genre)
 	{
+		for (Movie movieGenre : movieList)
+		{
+			if (genre.toLowerCase().contains(movieGenre.getGenre().toLowerCase()))
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 
