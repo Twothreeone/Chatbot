@@ -10,6 +10,9 @@ public class ChatbotController
 	private PopupDisplay display;
 	private ChatFrame appFrame;
 	
+	/**
+	 * Constructor for the ChatbotController. Initializes data members.
+	 */
 	public ChatbotController()
 	{
 		chatbot = new Chatbot("");
@@ -17,6 +20,9 @@ public class ChatbotController
 		appFrame = new ChatFrame(this);
 	}
 	
+	/**
+	 * This is called by the ChatRunner to start the program. 
+	 */
 	public void start()
 	{
 		String response = display.getResponse("What do you want to talk about?");
@@ -27,26 +33,47 @@ public class ChatbotController
 //		}
 	}
 	
+	/**
+	 * Does basic chatbot communication through popups.
+	 * @param chat The user's input.
+	 * @return The chatbot's response.
+	 */
 	private String popupChat(String chat)
 	{
 		return chatbot.processConversation(chat);
 	}
 	
+	/**
+	 * Does chatbot communication through the GUI.
+	 * @param input The user's input.
+	 * @return The chatbot's response.
+	 */
 	public String interactWithChatbot(String input)
 	{
 		return "";
 	}
 	
+	
+	/**
+	 * @return chatbot
+	 */
 	public Chatbot getChatbot()
 	{
 		return chatbot;
 	}
 	
+	
+	/**
+	 * @return display
+	 */
 	public PopupDisplay getDisplay()
 	{
 		return display;
 	}
 	
+	/**
+	 * @return appFrame
+	 */
 	public ChatFrame getChatFrame()
 	{
 		return appFrame;

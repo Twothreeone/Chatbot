@@ -19,16 +19,18 @@ public class Chatbot
 	private String intro;
 	private LocalTime currentTime;
 
+	/**
+	 * Constructor for Chatbot, initializes data members.
+	 * 
+	 * @param username
+	 */
 	public Chatbot(String username)
 	{
-		this.movieList = new ArrayList<Movie>();
 		this.cuteAnimalMemes = new ArrayList<String>();
 		this.currentTime = LocalTime.now();
 		this.username = username;
 		this.content = "content";
 		this.intro = "";
-		this.topics = new String[5];
-		this.verbs = new String[4];
 		this.followUps = new String[0];
 		buildMovieList();
 		buildShoppingList();
@@ -38,41 +40,42 @@ public class Chatbot
 		buildTopics();
 	}
 
+	/**
+	 * Builds the topics array.
+	 */
 	private void buildTopics()
 	{
-		topics[0] = "math";
-		topics[1] = "video games";
-		topics[2] = "food";
-		topics[3] = "anime";
-		topics[4] = "work";
-	}
-
-	private void buildVerbs()
-	{
-		verbs[0] = "like";
-		verbs[1] = "dislike";
-		verbs[2] = "am ambivalent about";
-		verbs[3] = "am thinking about";
-	}
-
-	private void buildMovieList()
-	{
-		movieList.add(new Movie("Back to the Future"));
-		movieList.add(new Movie("The Princess Bride"));
-		movieList.add(new Movie("Spirited Away"));
-		movieList.add(new Movie("Ferris Bueller's Day Off"));
-		movieList.add(new Movie("Space Balls"));
-		movieList.add(new Movie("Monty Python and the Quest for the Holy Grail"));
+		topics = new String[] {"math", "video games", "food", "anime", "work"};
 	}
 
 	/**
-	 * Creates the shoppingList ArrayList that will be used for the chatbot's responses.
+	 * Builds the verbs array.
+	 */
+	private void buildVerbs()
+	{
+		verbs = new String[] {"like", "dislike", "am ambivalent about", "am thinking about"};
+	}
+
+	/**
+	 * Builds the movieList.
+	 */
+	private void buildMovieList()
+	{
+		movieList = new ArrayList<Movie>(Arrays.asList(new Movie("Back to the Future"), new Movie("The Princess Bride"), new Movie("Spirited Away"), new Movie("Ferris Bueller's Day Off"),
+				new Movie("Space Balls"), new Movie("Monty Python and the Quest for the Holy Grail")));
+	}
+
+	/**
+	 * Builds the shoppingList.
 	 */
 	private void buildShoppingList()
 	{
 		shoppingList = new ArrayList<String>(Arrays.asList("snacks", "veggies", "protein", "red cream soda", "ice cream", "potato chips", "pringles", "candy", "donuts", "cake", "gum"));
 	}
 
+	/**
+	 * Builds the cuteAnimalMemes list.
+	 */
 	private void buildCuteAnimals()
 	{
 
@@ -125,6 +128,11 @@ public class Chatbot
 		return response;
 	}
 
+	/**
+	 * Checks the length of the users input to make sure it is valid.
+	 * @param input The user's input.
+	 * @return The validity of the user's input's length.
+	 */
 	public boolean lengthChecker(String input)
 	{
 		boolean properLength = false;
@@ -135,11 +143,21 @@ public class Chatbot
 		return properLength;
 	}
 
+	/**
+	 * Checks the validity of the HTML tag
+	 * @param input HTML tag
+	 * @return The validity of the HTML tag
+	 */
 	public boolean htmlTagChecker(String input)
 	{
 		return false;
 	}
 
+	/**
+	 * Checks the validity of the user's username.
+	 * @param input The user's username.
+	 * @return The validity of the user's username.
+	 */
 	public boolean userNameChecker(String input)
 	{
 		if (input == null)
@@ -153,6 +171,11 @@ public class Chatbot
 		return true;
 	}
 
+	/**
+	 * Checks if the content data member is anywhere in the supplied text.
+	 * @param contentCheck The user's input.
+	 * @return If the content data member is in the user's input.
+	 */
 	public boolean contentChecker(String contentCheck)
 	{
 		if (content.length() < 6)
@@ -166,11 +189,21 @@ public class Chatbot
 		return false;
 	}
 
+	/**
+	 * Checks if a cute animal meme is anywhere in the user's input.
+	 * @param input The user's input.
+	 * @return Whether or not the user's input contains a cute animal meme.
+	 */
 	public boolean cuteAnimalMemeChecker(String input)
 	{
 		return false;
 	}
 
+	/**
+	 * Checks if an item on the shoppingList is anywhere in the user's input.
+	 * @param shoppingItem The user's input.
+	 * @return Whether or not the user's input contains an item on the shoppingList.
+	 */
 	public boolean shoppingListChecker(String shoppingItem)
 	{
 		for (String item : shoppingList)
@@ -183,16 +216,31 @@ public class Chatbot
 		return false;
 	}
 
+	/**
+	 * Checks if a movie on the movieList appears anywhere in the user's input.
+	 * @param title The user's input.
+	 * @return Whether or not the user's input contains a movie on the movieList.
+	 */
 	public boolean movieTitleChecker(String title)
 	{
 		return false;
 	}
 
+	/**
+	 * Checks if a movie genre on the movieList appears anywhere in the user's input.
+	 * @param genre The user's input.
+	 * @return Whether or not the user's input contains a movie genre on the movieList.
+	 */
 	public boolean movieGenreChecker(String genre)
 	{
 		return false;
 	}
 
+	/**
+	 * Checks if the user wants to stop chatting.
+	 * @param exitString The user's input.
+	 * @return Whether or not the user wants to quit.
+	 */
 	public boolean quitChecker(String exitString)
 	{
 		if (exitString == null)
@@ -206,6 +254,11 @@ public class Chatbot
 		return false;
 	}
 
+	/**
+	 * Checks if the user is keyboard mashing.
+	 * @param sample The user's input.
+	 * @return Whether or not the user is keyboard mashing.
+	 */
 	public boolean keyboardMashChecker(String sample)
 	{
 		String[] mash = { "sdf", "SDF", "dfg", "cvb", ",./", "kjh", "DFG", "CVB", "KJH" };
@@ -219,71 +272,113 @@ public class Chatbot
 		return false;
 	}
 
+	/**
+	 * Overrides the standard toString method for more useful output.
+	 */
 	public String toString()
 	{
 		return "";
 	}
 
+	/**
+	 * @return movieList
+	 */
 	public List<Movie> getMovieList()
 	{
 		return movieList;
 	}
 
+	/**
+	 * @return shoppingList
+	 */
 	public List<String> getShoppingList()
 	{
 		return shoppingList;
 	}
 
+	/**
+	 * @return cuteAnimalMemes
+	 */
 	public List<String> getCuteAnimalMemes()
 	{
 		return cuteAnimalMemes;
 	}
 
+	/**
+	 * @return questions
+	 */
 	public String[] getQuestions()
 	{
 		return questions;
 	}
 
+	/**
+	 * @return verbs
+	 */
 	public String[] getVerbs()
 	{
 		return verbs;
 	}
 
+	/**
+	 * @return topics
+	 */
 	public String[] getTopics()
 	{
 		return topics;
 	}
 
+	/**
+	 * @return followUps
+	 */
 	public String[] getFollowUps()
 	{
 		return followUps;
 	}
 
+	/**
+	 * @return username
+	 */
 	public String getUsername()
 	{
 		return username;
 	}
 
+	/**
+	 * @return content
+	 */
 	public String getContent()
 	{
 		return content;
 	}
 
+	/**
+	 * @return intro
+	 */
 	public String getIntro()
 	{
 		return intro;
 	}
 
+	/**
+	 * @return currentTime
+	 */
 	public LocalTime getCurrentTime()
 	{
 		return currentTime;
 	}
 
+	/**
+	 * @param username new username
+	 */
 	public void setUsername(String username)
 	{
 		this.username = username;
 	}
 
+	/**
+	 * @param content new content
+	 */
 	public void setContent(String content)
 	{
 		this.content = content;
