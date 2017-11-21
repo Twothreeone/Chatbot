@@ -5,6 +5,11 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Manages the Chatbot application including the Model and Frame of the View package.
+ * @author Ben Charlesworth
+ * @version 21.11.17 Added Frame 1.3
+ */
 public class Chatbot
 {
 	private List<Movie> movieList;
