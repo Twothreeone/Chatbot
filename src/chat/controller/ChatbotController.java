@@ -42,6 +42,52 @@ public class ChatbotController
 		return chatbot.processConversation(input);
 	}
 	
+	/**
+	 * Runs all of the relevant checkers on the users inputed response.
+	 * @param text What the user typed.
+	 * @return What the chatbot will respond with.
+	 */
+	public String useCheckers(String text)
+	{
+		String response = "";
+		if (chatbot.contentChecker(text))
+		{
+			
+		}
+		if (chatbot.cuteAnimalMemeChecker(text))
+		{
+			
+		}
+		if (chatbot.htmlTagChecker(text))
+		{
+			
+		}
+		if (chatbot.keyboardMashChecker(text))
+		{
+			
+		}
+		if (chatbot.movieTitleChecker(text))
+		{
+			
+		}
+		if (chatbot.movieGenreChecker(text))
+		{
+			
+		}
+		if (chatbot.shoppingListChecker(text))
+		{
+			
+		}
+		if (chatbot.userNameChecker(text))
+		{
+			
+		}
+		return response;
+	}
+	
+	/**
+	 * Closes the program.
+	 */
 	private void close()
 	{
 		display.displayMessage("Goodbye");

@@ -17,6 +17,10 @@ public class ChatPanel extends JPanel
 	private JButton passTestButton2;
 	private JButton passTestButton3;
 	
+	/**
+	 * The constructor, sets all of the values and sets up the Panel.
+	 * @param appController The ChatbotController used by the program.
+	 */
 	public ChatPanel(ChatbotController appController)
 	{
 		super();
@@ -33,6 +37,9 @@ public class ChatPanel extends JPanel
 		setupListeners();
 	}
 	
+	/**
+	 * Adds all of the components and sets some values in the Panel.
+	 */
 	private void setupPanel()
 	{
 		this.setBackground(Color.CYAN);
@@ -47,6 +54,9 @@ public class ChatPanel extends JPanel
 		chatArea.setEnabled(false);
 	}
 	
+	/**
+	 * Moves all of the components to their proper spots.
+	 */
 	private void setupLayout()
 	{
 		appLayout.putConstraint(SpringLayout.NORTH, chatArea, 20, SpringLayout.NORTH, this);
@@ -64,6 +74,9 @@ public class ChatPanel extends JPanel
 		appLayout.putConstraint(SpringLayout.SOUTH, checkerButton, 0, SpringLayout.SOUTH, chatButton);
 	}
 	
+	/**
+	 * Sets up all of the Listeners for the components.
+	 */
 	private void setupListeners()
 	{
 		chatButton.addActionListener(new ActionListener()
@@ -90,7 +103,10 @@ public class ChatPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				
+				String userText = inputField.getText();
+				String displayText = appController.useCheckers(userText);
+				chatArea.append(displayText);
+				inputField.setText("");
 			}
 		});
 		passTestButton2.addActionListener(new ActionListener()

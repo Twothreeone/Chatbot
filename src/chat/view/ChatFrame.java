@@ -8,6 +8,10 @@ public class ChatFrame extends JFrame
 	private ChatbotController appController;
 	private ChatPanel appPane;
 	
+	/**
+	 * The constructor, it will set up the Frame and create the Panel.
+	 * @param appController The ChatbotController used by the program.
+	 */
 	public ChatFrame(ChatbotController appController)
 	{
 		super();
@@ -16,6 +20,9 @@ public class ChatFrame extends JFrame
 		setupFrame();
 	}
 
+	/**
+	 * Sets up the frame for the GUI.
+	 */
 	private void setupFrame()
 	{
 		this.setContentPane(appPane);
@@ -25,6 +32,9 @@ public class ChatFrame extends JFrame
 		this.setVisible(true);
 	}
 	
+	/**
+	 * @return appController
+	 */
 	public ChatbotController getBaseController()
 	{
 		return appController;
