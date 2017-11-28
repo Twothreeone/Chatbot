@@ -36,7 +36,7 @@ public class Chatbot
 		this.username = username;
 		this.content = "content";
 		this.intro = "";
-		this.followUps = new String[0];
+		this.followUps = new String[5];
 		buildMovieList();
 		buildShoppingList();
 		buildVerbs();
@@ -132,6 +132,23 @@ public class Chatbot
 			random = (int) (Math.random() * movieList.size());
 			response += "\n" + movieList.get(random).getTitle() + " is a great movie!" + "\n";
 		}
+		int followup = (int) (Math.random() * 5);
+		switch (followup)
+		{
+		case 0:
+			response += followUps[0] + "\n";
+			break;
+		case 3:
+			response += followUps[1] + "\n";
+			break;
+		case 1:
+			response += followUps[2] + "\n";
+			break;
+		default:
+			response += followUps[4] + "\n";
+			response += followUps[3] + "\n";
+			break;
+		}
 		return response;
 	}
 
@@ -161,6 +178,56 @@ public class Chatbot
 	 */
 	public boolean htmlTagChecker(String input)
 	{
+		if (!input.contains("<") || !input.contains(">"))
+		{
+			return false;
+		}
+		else if (input.contains("<>"))
+		{
+			return false;
+		}
+		else if (input.contains("< >"))
+		{
+			return false;
+		}
+		else if (input.toLowerCase().contains("<p>") || input.toLowerCase().contains("<br>"))
+		{
+			return true;
+		}
+		else if ((input.toLowerCase().contains("<a href=") && input.toLowerCase().contains("</a>")) && input.toLowerCase().indexOf("<a href=") < input.toLowerCase().indexOf("</a>"))
+		{
+			return true;
+		}
+		int firstOpenTag = input.indexOf("<");
+		int firstCloseTag = input.indexOf(">");
+		if (!(firstOpenTag < firstCloseTag))
+		{
+			return false;
+		}
+		if (input.indexOf("<", firstOpenTag + 1) == -1 || input.indexOf(">", firstCloseTag) + 1 == -1)
+		{
+			return false;
+		}
+		int secondOpenTag = input.indexOf("<", firstOpenTag + 1);
+		int secondCloseTag = input.indexOf(">", firstCloseTag + 1);
+		if (!(secondOpenTag < secondCloseTag))
+		{
+			return false;
+		}
+		if (!(firstCloseTag < secondOpenTag))
+		{
+			return false;
+		}
+		String firstInside = input.substring(firstOpenTag + 1, firstCloseTag);
+		String secondInside = input.substring(secondOpenTag + 1, secondCloseTag);
+		if (!secondInside.contains("/"))
+		{
+			return false;
+		}
+		if (firstInside.toLowerCase().equals(secondInside.substring(1, secondInside.length()).toLowerCase()))
+		{
+			return true;
+		}
 		return false;
 	}
 
