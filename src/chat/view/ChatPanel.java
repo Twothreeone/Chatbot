@@ -15,7 +15,8 @@ public class ChatPanel extends JPanel
 	private SpringLayout appLayout;
 	private JButton checkerButton;
 	private JLabel infoLabel;
-	private JButton passTestButton3;
+	private JScrollPane chatScrollPane;
+	private JButton passTestButton;
 	
 	/**
 	 * The constructor, sets all of the values and sets up the Panel.
@@ -31,10 +32,24 @@ public class ChatPanel extends JPanel
 		appLayout = new SpringLayout();
 		checkerButton = new JButton("check");
 		infoLabel = new JLabel();
-		passTestButton3 = new JButton();
+		chatScrollPane = new JScrollPane();
+		passTestButton = new JButton();
+		setupScrollPane();
 		setupPanel();
 		setupLayout();
 		setupListeners();
+	}
+	
+	/**
+	 * Adds all of the necessary attributes to the chatScrollPane.
+	 */
+	private void setupScrollPane()
+	{
+		chatScrollPane.setViewportView(chatArea);
+		chatScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		chatScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		chatArea.setLineWrap(true);
+		chatArea.setWrapStyleWord(true);
 	}
 	
 	/**
@@ -46,10 +61,10 @@ public class ChatPanel extends JPanel
 		this.setLayout(appLayout);
 		this.add(chatButton);
 		this.add(inputField);
-		this.add(chatArea);
 		this.add(checkerButton);
 		this.add(infoLabel);
-		this.add(passTestButton3);
+		this.add(chatScrollPane);
+		this.add(passTestButton);
 		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		infoLabel.setText("Type here to speak to chatbot");
 		chatArea.setEditable(false);
@@ -77,6 +92,10 @@ public class ChatPanel extends JPanel
 		appLayout.putConstraint(SpringLayout.WEST, infoLabel, 0, SpringLayout.WEST, inputField);
 		appLayout.putConstraint(SpringLayout.SOUTH, infoLabel, 0, SpringLayout.NORTH, inputField);
 		appLayout.putConstraint(SpringLayout.EAST, infoLabel, 0, SpringLayout.EAST, inputField);
+		appLayout.putConstraint(SpringLayout.NORTH, chatScrollPane, 20, SpringLayout.NORTH, this);
+		appLayout.putConstraint(SpringLayout.WEST, chatScrollPane, 20, SpringLayout.WEST, this);
+		appLayout.putConstraint(SpringLayout.SOUTH, chatScrollPane, -60, SpringLayout.SOUTH, this);
+		appLayout.putConstraint(SpringLayout.EAST, chatScrollPane, -20, SpringLayout.EAST, this);
 	}
 	
 	/**
@@ -114,7 +133,7 @@ public class ChatPanel extends JPanel
 				inputField.setText("");
 			}
 		});
-		passTestButton3.addActionListener(new ActionListener()
+		passTestButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent click)
 			{
