@@ -78,7 +78,8 @@ public class Chatbot
 	 */
 	private void buildShoppingList()
 	{
-		shoppingList = new ArrayList<String>(Arrays.asList("snacks", "veggies", "protein", "red cream soda", "ice cream", "potato chips", "pringles", "candy", "donuts", "cake", "gum"));
+		shoppingList = new ArrayList<String>(Arrays.asList("eggs", "hot peppers", "onions", "bagel", "crunchy peanut butter", "hot sauce", "juice", "snacks", "veggies", "protein", "red cream soda",
+				"ice cream", "potato chips", "pringles", "candy", "donuts", "cake", "gum"));
 	}
 
 	/**
