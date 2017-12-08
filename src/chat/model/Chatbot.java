@@ -37,14 +37,21 @@ public class Chatbot
 		this.username = username;
 		this.content = "content";
 		this.intro = "";
-		this.followUps = new String[5];
 		buildMovieList();
 		buildShoppingList();
 		buildVerbs();
 		buildQuestions();
-		// buildFollowups();
+		buildFollowUps();
 		buildTopics();
 		buildCuteAnimals();
+	}
+	
+	/**
+	 * Builds the followUps array.
+	 */
+	private void buildFollowUps()
+	{
+		followUps = new String[] { "Food is tasty.", "Video games are fun.", "I am really tired.", "I am lazy." };
 	}
 
 	/**
