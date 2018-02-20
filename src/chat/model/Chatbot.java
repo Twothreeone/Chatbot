@@ -102,8 +102,8 @@ public class Chatbot
 	 */
 	private void buildQuestions()
 	{
-		questions = new String[] { "What is your name?", "What are your favorite hobbies?", "How do you live?", "What is your favorite color?", "Why?", "What is your least favorite emotion?",
-				"What is your job?", "Why are you so useless?", "Do you sleep?", "What is your favorite movie?" };
+		questions = new String[] { "What is your name?", "What are your favorite hobbies?", "What is your social security number?", "What is your favorite color?", "Why?", "What is your least favorite emotion?",
+				"What is your job?", "Am I frustrating?", "Do you sleep?", "What is your favorite movie?" };
 	}
 
 	/**

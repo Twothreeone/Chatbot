@@ -94,6 +94,11 @@ public class ChatbotController
 		System.exit(0);
 	}
 	
+	public void HandleErrors(Exception error)
+	{
+		display.displayMessage(error.getMessage());
+	}
+	
 	/**
 	 * @return chatbot
 	 */
