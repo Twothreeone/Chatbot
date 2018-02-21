@@ -2,7 +2,6 @@ package chat.view;
 
 import chat.controller.ChatbotController;
 import javax.swing.JFrame;
-import java.awt.Dimension;
 
 public class ChatFrame extends JFrame
 {
@@ -28,9 +27,9 @@ public class ChatFrame extends JFrame
 	{
 		this.setContentPane(appPane);
 		this.setTitle("Chatting with the Chatbot");
-		this.setMinimumSize(new Dimension(500, 325));
 		this.setResizable(false);
-		this.setSize(500, 325);
+		this.setSize(500, 290);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
 	
