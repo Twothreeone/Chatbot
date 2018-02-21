@@ -97,9 +97,14 @@ public class ChatbotController
 		System.exit(0);
 	}
 	
-	public void HandleErrors(Exception error)
+	public void handleErrors(Exception error)
 	{
 		display.displayMessage(error.getMessage());
+	}
+	
+	public void tweet(String text)
+	{
+		myTwitter.sendTweet(text);
 	}
 	
 	/**
