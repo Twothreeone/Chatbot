@@ -10,13 +10,16 @@ public class ChatPanel extends JPanel
 {
 	private ChatbotController appController;
 	private JButton chatButton;
+	private JButton loadButton;
+	private JButton saveButton;
+	private JButton searchButton;
+	private JButton tweetButton;
 	private JTextField inputField;
 	private JTextArea chatArea;
 	private SpringLayout appLayout;
 	private JButton checkerButton;
 	private JLabel infoLabel;
 	private JScrollPane chatScrollPane;
-	private JButton passTestButton;
 	
 	/**
 	 * The constructor, sets all of the values and sets up the Panel.
@@ -26,14 +29,17 @@ public class ChatPanel extends JPanel
 	{
 		super();
 		this.appController = appController;
-		chatButton = new JButton("chat");
+		chatButton = new JButton("chat", new ImageIcon(getClass().getResource("/chat/view/images/chat.png")));
+		loadButton = new JButton("load", new ImageIcon(getClass().getResource("/chat/view/images/load.png")));
+		saveButton = new JButton("save", new ImageIcon(getClass().getResource("/chat/view/images/save.png")));
+		searchButton = new JButton("search", new ImageIcon(getClass().getResource("/chat/view/images/search.png")));
+		tweetButton = new JButton("tweet", new ImageIcon(getClass().getResource("/chat/view/images/tweet.png")));
 		chatArea = new JTextArea(10,25);
 		inputField = new JTextField(20);
 		appLayout = new SpringLayout();
 		checkerButton = new JButton("check");
 		infoLabel = new JLabel();
 		chatScrollPane = new JScrollPane();
-		passTestButton = new JButton();
 		setupScrollPane();
 		setupPanel();
 		setupLayout();
@@ -60,11 +66,14 @@ public class ChatPanel extends JPanel
 		this.setBackground(Color.CYAN);
 		this.setLayout(appLayout);
 		this.add(chatButton);
+		this.add(loadButton);
+		this.add(saveButton);
+		this.add(searchButton);
+		this.add(tweetButton);
 		this.add(inputField);
 		this.add(checkerButton);
 		this.add(infoLabel);
 		this.add(chatScrollPane);
-		this.add(passTestButton);
 		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		infoLabel.setText("Type here to speak to chatbot");
 		chatArea.setEditable(false);
@@ -76,26 +85,39 @@ public class ChatPanel extends JPanel
 	 */
 	private void setupLayout()
 	{
+		appLayout.putConstraint(SpringLayout.NORTH, checkerButton, 0, SpringLayout.NORTH, chatScrollPane);
+		appLayout.putConstraint(SpringLayout.EAST, chatScrollPane, 0, SpringLayout.WEST, checkerButton);
+		appLayout.putConstraint(SpringLayout.WEST, inputField, 0, SpringLayout.WEST, chatScrollPane);
+		appLayout.putConstraint(SpringLayout.NORTH, chatButton, 0, SpringLayout.SOUTH, checkerButton);
+		appLayout.putConstraint(SpringLayout.WEST, chatButton, 0, SpringLayout.WEST, checkerButton);
+		appLayout.putConstraint(SpringLayout.EAST, inputField, 0, SpringLayout.WEST, checkerButton);
+		appLayout.putConstraint(SpringLayout.WEST, checkerButton, -100, SpringLayout.EAST, this);
+		appLayout.putConstraint(SpringLayout.EAST, checkerButton, 0, SpringLayout.EAST, this);
+		appLayout.putConstraint(SpringLayout.NORTH, tweetButton, 0, SpringLayout.SOUTH, searchButton);
+		appLayout.putConstraint(SpringLayout.WEST, tweetButton, 0, SpringLayout.WEST, searchButton);
+		appLayout.putConstraint(SpringLayout.EAST, tweetButton, 0, SpringLayout.EAST, this);
+		appLayout.putConstraint(SpringLayout.NORTH, searchButton, 0, SpringLayout.SOUTH, saveButton);
+		appLayout.putConstraint(SpringLayout.WEST, searchButton, 0, SpringLayout.WEST, saveButton);
+		appLayout.putConstraint(SpringLayout.EAST, searchButton, 0, SpringLayout.EAST, this);
+		appLayout.putConstraint(SpringLayout.WEST, saveButton, 0, SpringLayout.WEST, loadButton);
+		appLayout.putConstraint(SpringLayout.WEST, loadButton, 0, SpringLayout.WEST, chatButton);
+		appLayout.putConstraint(SpringLayout.NORTH, saveButton, 0, SpringLayout.SOUTH, loadButton);
+		appLayout.putConstraint(SpringLayout.EAST, saveButton, 0, SpringLayout.EAST, this);
+		appLayout.putConstraint(SpringLayout.NORTH, loadButton, 0, SpringLayout.SOUTH, chatButton);
+		appLayout.putConstraint(SpringLayout.EAST, loadButton, 0, SpringLayout.EAST, this);
+		appLayout.putConstraint(SpringLayout.EAST, chatButton, 0, SpringLayout.EAST, this);
 		appLayout.putConstraint(SpringLayout.NORTH, chatArea, 20, SpringLayout.NORTH, this);
 		appLayout.putConstraint(SpringLayout.WEST, chatArea, 25, SpringLayout.WEST, this);
 		appLayout.putConstraint(SpringLayout.EAST, chatArea, -25, SpringLayout.EAST, this);
-		appLayout.putConstraint(SpringLayout.EAST, inputField, 0, SpringLayout.WEST, chatButton);
-		appLayout.putConstraint(SpringLayout.SOUTH, chatButton, -10, SpringLayout.SOUTH, this);
 		appLayout.putConstraint(SpringLayout.NORTH, inputField, 20, SpringLayout.SOUTH, chatArea);
-		appLayout.putConstraint(SpringLayout.NORTH, chatButton, 20, SpringLayout.SOUTH, chatArea);
 		appLayout.putConstraint(SpringLayout.SOUTH, inputField, -10, SpringLayout.SOUTH, this);
 		appLayout.putConstraint(SpringLayout.SOUTH, chatArea, -60, SpringLayout.SOUTH, this);
-		appLayout.putConstraint(SpringLayout.EAST, chatButton, -25, SpringLayout.EAST, this);
-		appLayout.putConstraint(SpringLayout.WEST, inputField, 0, SpringLayout.EAST, checkerButton);
-		appLayout.putConstraint(SpringLayout.WEST, checkerButton, 0, SpringLayout.WEST, chatArea);
-		appLayout.putConstraint(SpringLayout.SOUTH, checkerButton, 0, SpringLayout.SOUTH, chatButton);
 		appLayout.putConstraint(SpringLayout.WEST, infoLabel, 0, SpringLayout.WEST, inputField);
 		appLayout.putConstraint(SpringLayout.SOUTH, infoLabel, 0, SpringLayout.NORTH, inputField);
 		appLayout.putConstraint(SpringLayout.EAST, infoLabel, 0, SpringLayout.EAST, inputField);
 		appLayout.putConstraint(SpringLayout.NORTH, chatScrollPane, 20, SpringLayout.NORTH, this);
 		appLayout.putConstraint(SpringLayout.WEST, chatScrollPane, 20, SpringLayout.WEST, this);
 		appLayout.putConstraint(SpringLayout.SOUTH, chatScrollPane, -60, SpringLayout.SOUTH, this);
-		appLayout.putConstraint(SpringLayout.EAST, chatScrollPane, -20, SpringLayout.EAST, this);
 	}
 	
 	/**
@@ -133,7 +155,7 @@ public class ChatPanel extends JPanel
 				inputField.setText("");
 			}
 		});
-		passTestButton.addActionListener(new ActionListener()
+		loadButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent click)
 			{
