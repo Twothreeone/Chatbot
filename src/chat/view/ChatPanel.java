@@ -19,10 +19,12 @@ public class ChatPanel extends JPanel
 	private SpringLayout appLayout;
 	private JLabel infoLabel;
 	private JScrollPane chatScrollPane;
-	
+
 	/**
 	 * The constructor, sets all of the values and sets up the Panel.
-	 * @param appController The ChatbotController used by the program.
+	 * 
+	 * @param appController
+	 *            The ChatbotController used by the program.
 	 */
 	public ChatPanel(ChatbotController appController)
 	{
@@ -33,7 +35,7 @@ public class ChatPanel extends JPanel
 		saveButton = new JButton("save", new ImageIcon(getClass().getResource("/chat/view/images/save.png")));
 		searchButton = new JButton("search", new ImageIcon(getClass().getResource("/chat/view/images/search.png")));
 		tweetButton = new JButton("tweet", new ImageIcon(getClass().getResource("/chat/view/images/tweet.png")));
-		chatArea = new JTextArea(10,25);
+		chatArea = new JTextArea(10, 25);
 		inputField = new JTextField(20);
 		appLayout = new SpringLayout();
 		infoLabel = new JLabel();
@@ -43,7 +45,7 @@ public class ChatPanel extends JPanel
 		setupLayout();
 		setupListeners();
 	}
-	
+
 	/**
 	 * Adds all of the necessary attributes to the chatScrollPane.
 	 */
@@ -55,7 +57,7 @@ public class ChatPanel extends JPanel
 		chatArea.setLineWrap(true);
 		chatArea.setWrapStyleWord(true);
 	}
-	
+
 	/**
 	 * Adds all of the components and sets some values in the Panel.
 	 */
@@ -76,7 +78,7 @@ public class ChatPanel extends JPanel
 		chatArea.setEditable(false);
 		chatArea.setEnabled(false);
 	}
-	
+
 	/**
 	 * Moves all of the components to their proper spots.
 	 */
@@ -113,59 +115,39 @@ public class ChatPanel extends JPanel
 		appLayout.putConstraint(SpringLayout.WEST, chatScrollPane, 20, SpringLayout.WEST, this);
 		appLayout.putConstraint(SpringLayout.SOUTH, chatScrollPane, -60, SpringLayout.SOUTH, this);
 	}
-	
+
 	/**
 	 * Sets up all of the Listeners for the components.
 	 */
 	private void setupListeners()
 	{
-		chatButton.addActionListener(new ActionListener()
+		chatButton.addActionListener(click ->
 		{
-			public void actionPerformed(ActionEvent click)
-			{
-				String userText = inputField.getText();
-				String displayText = appController.interactWithChatbot(userText);
-				chatArea.append(displayText);
-				inputField.setText("");
-			}
+			String userText = inputField.getText();
+			String displayText = appController.interactWithChatbot(userText);
+			chatArea.append(displayText);
+			inputField.setText("");
 		});
-		inputField.addActionListener(new ActionListener()
+		inputField.addActionListener(click ->
 		{
-			public void actionPerformed(ActionEvent click)
-			{
-				String userText = inputField.getText();
-				String displayText = appController.interactWithChatbot(userText);
-				chatArea.append(displayText);
-				inputField.setText("");
-			}
+			String userText = inputField.getText();
+			String displayText = appController.interactWithChatbot(userText);
+			chatArea.append(displayText);
+			inputField.setText("");
 		});
-		loadButton.addActionListener(new ActionListener()
+		loadButton.addActionListener(click ->
 		{
-			public void actionPerformed(ActionEvent click)
-			{
-				
-			}
+
 		});
-		saveButton.addActionListener(new ActionListener()
+		saveButton.addActionListener(click ->
 		{
-			public void actionPerformed(ActionEvent click)
-			{
-				
-			}
+
 		});
-		searchButton.addActionListener(new ActionListener()
+		searchButton.addActionListener(click ->
 		{
-			public void actionPerformed(ActionEvent click)
-			{
-				
-			}
+			String usernameToSearch = inputField.getText();
+			chatArea.setText(appController.search(usernameToSearch));
 		});
-		tweetButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent click)
-			{
-				appController.tweet(inputField.getText());
-			}
-		});
+		tweetButton.addActionListener(click -> appController.tweet(inputField.getText()));
 	}
 }
