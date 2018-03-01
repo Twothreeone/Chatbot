@@ -23,7 +23,7 @@ public class CTECTwitter
 	private List<Status> searchedTweets;
 	private List<String> tweetedWords;
 	private long totalWordCount;
-	
+
 	public CTECTwitter(ChatbotController appController)
 	{
 		this.appController = appController;
@@ -32,31 +32,32 @@ public class CTECTwitter
 		this.tweetedWords = new ArrayList<String>();
 		this.totalWordCount = 0;
 	}
-	
+
 	public void sendTweet(String textToTweet)
 	{
 		try
 		{
 			chatbotTwitter.updateStatus(textToTweet + " @ChatbotCTEC");
 		}
-		catch(TwitterException tweetError)
+		catch (TwitterException tweetError)
 		{
 			appController.handleErrors(tweetError);
 		}
-		catch(Exception otherError)
+		catch (Exception otherError)
 		{
 			appController.handleErrors(otherError);
 		}
 	}
-	
+
 	public String getMostCommonWord(String username)
 	{
 		String mostCommon = "";
 		collectTweets(username);
+		turnStatusesToWords();
 		return mostCommon;
 	}
-	
-	public void collectTweets(String username)
+
+	private void collectTweets(String username)
 	{
 		searchedTweets.clear();
 		tweetedWords.clear();
@@ -69,7 +70,7 @@ public class CTECTwitter
 			try
 			{
 				ResponseList<Status> listedTweets = chatbotTwitter.getUserTimeline(username, statusPage);
-				for(Status current : listedTweets)
+				for (Status current : listedTweets)
 				{
 					if (current.getId() < lastID)
 					{
@@ -78,11 +79,38 @@ public class CTECTwitter
 					}
 				}
 			}
-			catch(TwitterException searchTweetError)
+			catch (TwitterException searchTweetError)
 			{
 				appController.handleErrors(searchTweetError);
 			}
 			page++;
 		}
+	}
+
+	private void turnStatusesToWords()
+	{
+		for (Status currentStatus : searchedTweets)
+		{
+			String tweetText = currentStatus.getText();
+			String[] tweetWords = tweetText.split(" ");
+			for (int i = 0; i < tweetWords.length; i++)
+			{
+				tweetedWords.add(removePunctuation(tweetWords[i]).trim());
+			}
+		}
+	}
+
+	private String removePunctuation(String currentString)
+	{
+		String punctuation = ".,'?!:;\"(){}^[]<>-";
+		String scrubbedString = "";
+		for (int i = 0; i < currentString.length(); i++)
+		{
+			if (punctuation.indexOf(currentString.charAt(i)) == -1)
+			{
+				scrubbedString += currentString.charAt(i);
+			}
+		}
+		return scrubbedString;
 	}
 }
