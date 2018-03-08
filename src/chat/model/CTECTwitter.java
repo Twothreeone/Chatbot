@@ -60,6 +60,8 @@ public class CTECTwitter
 		totalWordCount = tweetedWords.size();
 		String[] boring = createIgnoredWordArray();
 		trimTheBoringWords(boring);
+		removeBlanks();
+		generateWordCount();
 		return mostCommon;
 	}
 
@@ -154,6 +156,32 @@ public class CTECTwitter
 					tweetedWords.remove(i);
 					break;
 				}
+			}
+		}
+	}
+	
+	private void removeBlanks()
+	{
+		for (int i = tweetedWords.size() - 1; i >= 0; i--)
+		{
+			if (tweetedWords.get(i).trim().length() == 0)
+			{
+				tweetedWords.remove(i);
+			}
+		}
+	}
+	
+	private void generateWordCount()
+	{
+		for (String word : tweetedWords)
+		{
+			if (!wordsAndCount.containsKey(word.toLowerCase()))
+			{
+				wordsAndCount.put(word.toLowerCase(), 1);
+			}
+			else
+			{
+				wordsAndCount.replace(word.toLowerCase(), wordsAndCount.get(word.toLowerCase()) + 1);
 			}
 		}
 	}
