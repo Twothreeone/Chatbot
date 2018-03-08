@@ -14,6 +14,7 @@ import twitter4j.ResponseList;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.text.DecimalFormat;
 
 public class CTECTwitter
@@ -23,6 +24,7 @@ public class CTECTwitter
 	private List<Status> searchedTweets;
 	private List<String> tweetedWords;
 	private long totalWordCount;
+	private HashMap<String, Integer> wordsAndCount;
 
 	public CTECTwitter(ChatbotController appController)
 	{
@@ -31,6 +33,7 @@ public class CTECTwitter
 		this.searchedTweets = new ArrayList<Status>();
 		this.tweetedWords = new ArrayList<String>();
 		this.totalWordCount = 0;
+		this.wordsAndCount = new HashMap<String, Integer>();
 	}
 
 	public void sendTweet(String textToTweet)
@@ -56,6 +59,7 @@ public class CTECTwitter
 		turnStatusesToWords();
 		totalWordCount = tweetedWords.size();
 		String[] boring = createIgnoredWordArray();
+		trimTheBoringWords(boring);
 		return mostCommon;
 	}
 
@@ -94,6 +98,7 @@ public class CTECTwitter
 		for (Status currentStatus : searchedTweets)
 		{
 			String tweetText = currentStatus.getText();
+			tweetText = tweetText.replace("\n", " ");
 			String[] tweetWords = tweetText.split(" ");
 			for (int i = 0; i < tweetWords.length; i++)
 			{
@@ -115,14 +120,14 @@ public class CTECTwitter
 		}
 		return scrubbedString;
 	}
-	
+
 	private String[] createIgnoredWordArray()
 	{
 		String[] boringWords;
 		String fileText = IOController.loadFromFile(appController, "commonWords.txt");
 		int wordCount = 0;
 		Scanner wordScanner = new Scanner(fileText);
-		while(wordScanner.hasNextLine())
+		while (wordScanner.hasNextLine())
 		{
 			wordScanner.nextLine();
 			wordCount++;
@@ -136,5 +141,20 @@ public class CTECTwitter
 		}
 		wordScanner.close();
 		return boringWords;
+	}
+
+	private void trimTheBoringWords(String[] boringWords)
+	{
+		for (int i = tweetedWords.size() - 1; i >= 0; i--)
+		{
+			for (int j = 0; j < boringWords.length; j++)
+			{
+				if (tweetedWords.get(i).equals(boringWords[j]))
+				{
+					tweetedWords.remove(i);
+					break;
+				}
+			}
+		}
 	}
 }
