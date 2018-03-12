@@ -60,8 +60,8 @@ public class CTECTwitter
 		turnStatusesToWords();
 		totalWordCount = tweetedWords.size();
 		String[] boring = createIgnoredWordArray();
-		trimTheBoringWords(boring);
 		removeBlanks();
+		trimTheBoringWords(boring);
 		generateWordCount();
 		ArrayList<Map.Entry<String, Integer>> sorted = sortHashMap();
 		String mostCommonWord = sorted.get(0).getKey();
@@ -107,7 +107,7 @@ public class CTECTwitter
 	{
 		for (Status currentStatus : searchedTweets)
 		{
-			String tweetText = currentStatus.getText();
+			String tweetText = currentStatus.getText().toLowerCase();
 			tweetText = tweetText.replace("\n", " ");
 			String[] tweetWords = tweetText.split(" ");
 			for (int i = 0; i < tweetWords.length; i++)
@@ -153,21 +153,6 @@ public class CTECTwitter
 		return boringWords;
 	}
 
-	private void trimTheBoringWords(String[] boringWords)
-	{
-		for (int i = tweetedWords.size() - 1; i >= 0; i--)
-		{
-			for (int j = 0; j < boringWords.length; j++)
-			{
-				if (tweetedWords.get(i).equals(boringWords[j]))
-				{
-					tweetedWords.remove(i);
-					break;
-				}
-			}
-		}
-	}
-
 	private void removeBlanks()
 	{
 		for (int i = tweetedWords.size() - 1; i >= 0; i--)
@@ -175,6 +160,21 @@ public class CTECTwitter
 			if (tweetedWords.get(i).trim().length() == 0)
 			{
 				tweetedWords.remove(i);
+			}
+		}
+	}
+	
+	private void trimTheBoringWords(String[] boringWords)
+	{
+		for (int i = tweetedWords.size() - 1; i >= 0; i--)
+		{
+			for (int j = 0; j < boringWords.length; j++)
+			{
+				if (tweetedWords.get(i).equalsIgnoreCase(boringWords[j]))
+				{
+					tweetedWords.remove(i);
+					break;
+				}
 			}
 		}
 	}
