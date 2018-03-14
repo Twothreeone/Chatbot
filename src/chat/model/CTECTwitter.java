@@ -69,7 +69,7 @@ public class CTECTwitter
 		maxWord = sorted.get(0).getValue();
 		mostCommon = "The most common word in " + username + "'s " + searchedTweets.size() + " tweets is " + mostCommonWord + ", and it was used " + maxWord + " times.\nThis is "
 				+ (DecimalFormat.getPercentInstance().format(((double) maxWord) / totalWordCount)) + " of total words: " + totalWordCount + " and is "
-				+ (DecimalFormat.getPercentInstance().format(((double) maxWord) / wordsAndCount.size())) + " of the unique words: " + wordsAndCount.size();
+				+ (DecimalFormat.getPercentInstance().format(((double) maxWord) / wordsAndCount.size())) + " of the unique words: " + wordsAndCount.size() + "\n\n" + sortedWords();
 		return mostCommon;
 	}
 
@@ -163,7 +163,7 @@ public class CTECTwitter
 			}
 		}
 	}
-	
+
 	private void trimTheBoringWords(String[] boringWords)
 	{
 		for (int i = tweetedWords.size() - 1; i >= 0; i--)
@@ -199,5 +199,35 @@ public class CTECTwitter
 		ArrayList<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(wordsAndCount.entrySet());
 		entries.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
 		return entries;
+	}
+
+	private String sortedWords()
+	{
+		String allWords = "";
+		String[] words = new String[wordsAndCount.size()];
+		ArrayList<String> wordList = new ArrayList<String>(wordsAndCount.keySet());
+		for (int i = 0; i < wordsAndCount.size(); i++)
+		{
+			words[i] = wordList.get(i);
+		}
+		for (int i = 0; i < words.length - 1; i++)
+		{
+			int maxIndex = i;
+			for (int j = i + 1; j < words.length; j++)
+			{
+				if (words[j].compareTo(words[maxIndex]) > 0)
+				{
+					maxIndex = j;
+				}
+			}
+			String tempMax = words[maxIndex];
+			words[maxIndex] = words[i];
+			words[i] = tempMax;
+		}
+		for (String word : words)
+		{
+			allWords += word + ", ";
+		}
+		return allWords;
 	}
 }
