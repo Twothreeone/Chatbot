@@ -29,7 +29,7 @@ public class ChatbotController
 	public void start()
 	{
 		String results = IOController.loadFromFile(this, "commonWords.txt");
-		IOController.saveToFile(this, results, "");
+		//IOController.saveToFile(this, results, "");
 	}
 	
 	/**
