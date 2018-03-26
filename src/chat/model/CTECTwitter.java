@@ -238,7 +238,7 @@ public class CTECTwitter
 		Query twitterQuery = new Query(topic);
 		int resultMax = 750;
 		long lastId = Long.MAX_VALUE;
-		twitterQuery.setGeoCode(new GeoLocation(40, -112), 500, Query.MILES);
+		twitterQuery.setGeoCode(new GeoLocation(40, -112), 100, Query.MILES);
 		ArrayList<Status> matchingTweets = new ArrayList<Status>();
 		while(searchedTweets.size() < resultMax)
 		{
@@ -250,16 +250,17 @@ public class CTECTwitter
 				String[] boring = createIgnoredWordArray();
 				removeBlanks();
 				trimTheBoringWords(boring);
-				for (String word : tweetedWords)
-				{
-					
-				}
 			}
 			catch(TwitterException error)
 			{
+				System.out.println(searchedTweets.size());
 				appController.handleErrors(error);
 			}
 			twitterQuery.setMaxId(lastId - 1);
+		}
+		for (String word : tweetedWords)
+		{
+			System.out.println(word);
 		}
 		results += "Talk about the search results";
 		results += "Find a tweet that will pass one of the checkers in chatbot";
